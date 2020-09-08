@@ -42,5 +42,3 @@ def kl_divergence(p, q):
 
 def mse(p, q):
     return np.mean((np.array(p)-np.array(q))**2)
-
-generate_benford_plots()

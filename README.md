@@ -15,7 +15,7 @@ A graphical view of the proportions can be found below.
 - `s&p500_dist.csv` -- This is similar to the aforementioned file, except the counts are converted to percentages.
 
 ## II. Code:
-General overview of the dataset:
+General overview of the dataset (and breakdown by sector):
 
 `python eval.py`
 
