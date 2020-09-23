@@ -22,3 +22,12 @@ General overview of the dataset (and breakdown by sector):
 Full history of individual stock:
 
 `python indiv_stock.py --stock=(symbol)`
+
+
+### III. Todo:
+- [ ] Code cleanup
+- [ ] Fix the metric
+- [ ] Get distribution by date (and some preliminary analysis)
+- [ ] Volatility implementation
+- [ ] Correlation study between volatility and Benford scores
+- [ ] Do Benford analysis on other data (e.g. returns)
