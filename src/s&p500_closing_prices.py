@@ -1,18 +1,19 @@
 import os
 import argparse
 import pandas as pd 
+from tqdm import tqdm
 
-from utils import get_closing_prices, get_dist 
+from utils import Stocks
 
 
 def main(config):
+    s = Stocks()
     sp_companies = pd.read_csv("data/constituents.csv")
    
     company_list, digit_distributions, digit_distributions_perc = [], [], []
-    for sym in sp_companies["Symbol"]:
-        print(sym)
-        closing_prices = get_closing_prices(sym)
-        first_digit_cnts, first_digit_cnts_percs = get_dist(closing_prices)
+    for sym in tqdm(sp_companies["Symbol"]):
+        closing_prices = s.get_closing_prices(sym)
+        first_digit_cnts, first_digit_cnts_percs = s.get_dist(closing_prices)
         if (len(first_digit_cnts) == 0): continue
 
         company_list.append(sym)
