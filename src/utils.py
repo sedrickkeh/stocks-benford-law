@@ -1,5 +1,12 @@
 import numpy as np 
 import matplotlib.pyplot as plt  
+import yfinance as yf
+
+def get_closing_prices(sym):
+    ticker = yf.Ticker(sym)
+    df = ticker.history(period="max")
+    close_prices = df["Close"]
+    return close_prices
 
 def get_dist(price_arr):
     first_digit_cnts = [0 for i in range(10)]
@@ -38,7 +45,14 @@ def generate_benford_plots():
 
 
 def kl_divergence(p, q):
-	return sum(p[i] * np.log2(p[i]/q[i]) for i in range(len(p)))
+	return np.sum(p[i] * np.log2(p[i]/q[i]) for i in range(len(p)))
 
 def mse(p, q):
     return np.mean((np.array(p)-np.array(q))**2)
+
+def chi_squared(o, e):
+    return np.sum(((p-q)**2)/q for (p,q) in zip(o, e))
+
+def get_score(p):
+    benford = benford_dist()
+    return chi_squared(p, benford)
