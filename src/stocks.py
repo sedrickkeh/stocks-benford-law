@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd 
 
 class Stocks:
@@ -35,3 +36,10 @@ class Stocks:
 
         first_digit_cnts_percs = [(x/s) for x in first_digit_cnts]
         return first_digit_cnts[1:], first_digit_cnts_percs[1:]
+
+    def get_volatility(self, sym):
+        prices = self.get_closing_prices(sym)
+        yesterday = prices[1:].values
+        today = prices[:-1].values
+        returns = (today-yesterday)/yesterday
+        return np.std(returns)
