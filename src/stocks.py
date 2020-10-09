@@ -7,7 +7,7 @@ class Stocks:
         self.df = pd.read_csv("data/prices.csv", index_col="Start Date")
         self.dates = self.df.index
 
-    def get_closing_prices(self, sym):
+    def __getitem__(self, sym):
         return self.df[sym].dropna()
 
     def get_by_date(self, sym, start_date="1980-01-01", end_date="2020-09-29"):
@@ -21,7 +21,7 @@ class Stocks:
 
     def get_dist(self, sym):
         first_digit_cnts = [0 for i in range(10)]
-        price_arr = self.get_closing_prices(sym)
+        price_arr = self[sym]
         for p in price_arr:
             try:
                 for digit in str(p):
@@ -38,7 +38,7 @@ class Stocks:
         return first_digit_cnts[1:], first_digit_cnts_percs[1:]
 
     def get_volatility(self, sym):
-        prices = self.get_closing_prices(sym)
+        prices = self[sym]
         yesterday = prices[1:].values
         today = prices[:-1].values
         returns = (today-yesterday)/yesterday
